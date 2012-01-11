@@ -1,0 +1,122 @@
+<% @page_title = "Personalize: #{@user.username}" %>
+<% content_for(:head) do %>
+	<%= javascript_include_tag 'project_js/form' %>
+	<%= stylesheet_link_tag "proj_style" %>
+<% end %>
+
+
+<h1>Appearance</h1>
+<p class="sec-desc">Use the toggles below adjust the color, font, and image size for the whole of your portfolio. Play around!</p>
+<div class="info-wrap dark">
+	
+  <!-- color-scheme -->
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  <%= error_messages_for(@user) %>
+    <div class="option-set color-scheme odd">
+    	<label class="fleft opt-text">Color Scheme</label>
+    	<div class="black-box button fleft">&nbsp;</div>
+    	<span class="fleft opt-text">or</span>
+    	<div class="white-box button fleft">&nbsp;</div>
+    	<%= f.hidden_field :color_scheme, :value => 1, :class=> 'colorScheme fval' %>
+    </div>
+  <% end %>
+  
+  <!-- font-face -->
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  <%= error_messages_for(@user) %>
+  <div class="option-set font-face even">
+  	<label class="fleft opt-text">Font Face</label>
+  	<div class="black-box button fleft">Aa</div>
+  	<span class="fleft opt-text">or</span>
+  	<div class="white-box button fleft">Aa</div>
+  </div>
+  <% end %>
+  
+  <!-- image-size -->
+  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "form_imgselect" }) do |f| %>
+  <div class="option-set image-size odd">
+  	<label class="fleft opt-text">Image Size</label>
+  	<div class="black-box button fleft">BIG</div>
+  	<span class="fleft opt-text">or</span>
+  	<div class="white-box button fleft">Normal</div>
+  </div>
+  <% end %>
+  
+</div> <!-- END info-wrap dark -->
+
+<h1>Header</h1>
+<div class="info-wrap">
+	
+	<!-- Header Title -->
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id }, :html => { :class => "form_proj" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<p class="label tiny">Title</p>
+			<span class="text fval"><%= @user.header_title %></span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Title /", :class => "tiny") %>
+			<%= f.text_field(:header_title, :class => 'big field', :width => '80%') %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+	
+	<!-- LOGO FOR THE PORTFOLIO -->	
+	<% if @user.logo.url.nil? #if user logo is not set %>
+	  <p class="label tiny">Upload Image: tempo for logo</p>
+	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+	    <%= f.file_field :logo %>
+	    	<p class="action">
+	  	  <%= submit_tag("Save", :class => 'save')  %>
+	  	</p>
+	  <% end %>
+	<% else #if user logo is set %>
+	  <div class="form-wrap image">
+	  	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+	  	<%= error_messages_for(@user) %>
+	  	  <div class="rowfield">
+	  		<div class="edit-btn">Edit</div>
+	  		<p class="label tiny">Custom Logo: </p>
+	  		<%= image_tag @user.logo.url(:thumb).to_s %>
+	  	  </div>
+	  	  <div class="row fedit">
+	  	  	<%= content_tag(:p, "Custom Logo /", :class => "tiny") %>
+	  		<%= f.file_field :logo %>
+	  		<p class="action">
+	  		  <%= submit_tag("Save", :class => 'save')  %>
+	  		  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+	  		</p>
+	  	  </div>
+	  	<% end %>
+	  </div> <!-- END .form-wrap -->
+    <% end # end of if @user.logo.url.nil?%>
+	
+</div> <!-- END .form-wrap -->
+
+<h1>Footer</h1>
+<div class="info-wrap">
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id }, :html => { :class => "form_proj" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<p class="label tiny">Footer Blurb</p>
+			<span class="text fval"><%= @user.footer_title %></span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Footer Blurb /", :class => "tiny") %>
+			<%= f.text_field(:footer_title, :class => 'big field', :width => '80%') %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+</div>

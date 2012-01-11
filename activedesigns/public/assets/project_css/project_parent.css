@@ -1,0 +1,48 @@
+.project.form {
+  background: #F9F9F9;
+  width: 500px;
+  margin: 50px auto 0;
+  padding: 10px;
+}
+
+.project.form span {
+  background: none repeat scroll 0 0 transparent;
+  display: block;
+  margin: 15px auto;
+}
+.project.form span label {
+  color: #888888;
+  display: block;
+  font-size: 18px;
+  padding-bottom: 6px;
+}
+
+.project.form span .textinput {
+    border: 1px solid #CCCCCC;
+    font-size: 18px;
+    padding: 4px;
+    width: 90%;
+}
+.project.form span .rme {
+  display: inline;
+  margin: 0 0 0 10px;
+}
+
+.project.form span.action {
+  
+}
+.signup-link {
+  background: #FFBF00;
+}
+.button {
+  padding: 5px 10px;
+  color: #000000;
+  background: #FFBF00;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+  font: normal normal normal 22px/normal Helvetica;
+}
+.button:hover {
+  background: #BFE4FC;
+}

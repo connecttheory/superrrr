@@ -1,0 +1,299 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+@import "reset.css.scss";
+@import "projects.css.scss";
+
+.twtr-widget {
+  width: 250px;
+  float: right;
+}
+
+.fnotice_js {
+  float: left;	
+}
+
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
+a { color: #55B5E5; }
+body {background: #eeeeee; margin: 0; padding: 0; font-family: Helvetica; color: #333333; }
+#container {
+  width: 960px;
+  margin: 0 auto;
+  font-family: Helvetica;
+  color: #333333;
+  padding: 10px 0 0 0;
+  min-height: 550px;
+}
+
+/***********************header style****************************/
+.mini-nav { padding: 15px 0 0 0;}
+.small {font-size: .8em }
+div#header { 
+  background: #ffffff; 
+  width: 100%;
+    .header-wrap {
+      width: 960px;
+      margin: 0 auto;
+    }
+}
+
+.main-nav {
+  list-style: none;
+  margin: 0 0 20px 0;
+	
+  li {
+    display: inline;
+    float: left;
+    margin: 0 25px 0 0;
+    font-size: 13px;
+  }
+}
+.main-nav li a { color: #333333; font-size: 13px; }
+
+
+.logout {
+  margin: 10px 0 0 0;
+  text-align: right;
+  float: right;
+}
+/***********************end header style****************************/
+/***********************body style****************************/
+#container h1 {
+  color: #888;
+  font: normal normal normal 18px/40px Helvetica, Arial, sans-serif;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+.info-wrap {
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 0 0 30px 0;
+  @include rounded-corners(6px);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.project {
+  width: 800px;
+  margin: 0 auto;
+}
+.project-thumb {
+  width: 240px;
+  float: left;
+  margin: 6px;
+}
+.curve {
+  border: 5px solid #EEEEEE;
+  @include rounded-corners(5px);
+  width: 240px;
+  float: left;
+  margin: 0 30px 15px 0;
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.curve:hover {
+  border: 5px solid #55B5E5;
+  .project-cap {
+    background: #55B5E5;
+  }
+}
+.project-cap {
+  text-align: center;
+  background: #EEEEEE;
+  padding: 4px 0 1px 0;
+  a {
+    color: #666666;
+    font-size: 13px;
+  }
+}
+.form_proj {
+  padding: 12px 12px 18px 74px;
+  background: #F6F6F6;
+  margin: 0 0 20px 0;
+  position: relative;
+  text-align: left;
+}
+.form_proj:hover {
+  background: #DCEEF7;
+}
+.form_proj_image {
+  padding: 12px 12px 18px 74px;
+  background: #F6F6F6;
+  margin: 0 0 20px 0;
+  position: relative;
+  text-align: left;
+}
+.form_proj_image:hover {
+  background: #DCEEF7;
+}
+
+div.edit-btn {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background: #55B5E5;
+  left: 10px;
+  top: 18px;
+  @include rounded-corners(8px);
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.tiny {
+  font-size:11px;
+}
+.text {
+  font-size: 27px;
+}
+.description .text {
+  font-size: 13px;
+}
+input.big {
+  border: 1px solid #666666;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 27px; /*1.7em*/
+  padding: 2px;
+  width: 80%;
+}
+input.halfbig {
+  border: 1px solid #666666;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 27px; /*1.7em*/
+  padding: 2px;
+  width: 30%;
+}
+/**************** sections ***************/
+.section h1 {
+  color: #888;
+  font: normal normal normal 18px/40px Helvetica, Arial, sans-serif;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+p.sec-desc {
+  color: #777777;
+  font: normal normal normal 12px/17px Helvetica, Arial, sans-serif;
+  text-shadow: 1px 1px 0 #ffffff;
+}
+/***********************end body style****************************/
+
+/***buttons****/
+.button {
+  margin: 15px 10px 0 10px;
+  @include rounded-corners(4px);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.black-box {
+  background: #000;
+  width: 104px;
+  height: 74px;
+}
+.white-box {
+  background: #eeeeee;
+  width: 104px;
+  height: 74px;
+
+}
+.option-set {
+  height: 100px;
+}
+.option-set .opt-text {
+  font: normal normal normal 14px/100px Helvetica;
+  color: #888888;
+  height: 100px;
+}
+.option-set label {
+  width: 160px;
+  text-align: right;
+  margin: 0 20px 0 0;
+}
+.dark {
+  background: #F6F6F6;
+  border: 1px solid #CECECE;
+  padding: 0;
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  @include rounded-corners(10px);
+}
+.dark .odd {
+  background: #E6E6E6;
+}
+
+
+.simp-curve {
+  @include rounded-corners(15px);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#main-footer {
+  width: 100%;
+  background: #1D1D1D;
+  color: #ffffff;
+}
+#footer-wrap {
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/*basic form*/
+.form {
+  background: #F9F9F9;
+  width: 500px;
+  margin: 50px auto 0;
+  padding: 10px;
+}
+
+.form span {
+  background: none repeat scroll 0 0 transparent;
+  display: block;
+  margin: 15px auto;
+}
+.form span label {
+  color: #888888;
+  display: block;
+  font-size: 18px;
+  padding-bottom: 6px;
+}
+
+.form span .textinput {
+    border: 1px solid #CCCCCC;
+    font-size: 18px;
+    padding: 4px;
+    width: 90%;
+}
+.form span .rme {
+  display: inline;
+  margin: 0 0 0 10px;
+}
+
+.form span.action {
+  
+}
+.signup-link {
+  background: #FFBF00;
+}
+.button {
+  padding: 5px 10px;
+  color: #000000;
+  background: #FFBF00;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+  font: normal normal normal 22px/normal Helvetica;
+}
+.button:hover {
+  background: #BFE4FC;
+}

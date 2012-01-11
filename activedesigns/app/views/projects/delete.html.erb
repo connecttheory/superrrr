@@ -1,0 +1,17 @@
+<% @page_title = "Delete Project: #{@project.title}" %>
+
+<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
+
+<div class="project delete">
+  <h2>Create a new Project</h2>
+
+  <%= form_for(:project, :url => {:action => 'destroy', :id => @project.id, :user_id => session[:user_id] }) do |f| %>
+  
+    <p>Are you sure you want to permanently delete this <em><%= @project.title %></em> Project</p>
+    
+    <div class="form-buttons">
+      <%= submit_tag("Delete Project") %>
+    </div>
+    
+  <% end %>
+</div>

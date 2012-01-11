@@ -1,0 +1,54 @@
+<% @page_title = "Porfolio: #{@user.username}" %>
+<% content_for(:head) do %>
+	<%= stylesheet_link_tag "proj_style" %>
+	
+
+	
+	<%= stylesheet_link_tag "porfolio_view" %>
+
+<% end %>
+
+<% if @user.google_analytics.blank? #put default google analytics if client ga is empty/not set %>
+  <% content_for(:before_body_tag) do %>
+  	<%= render(:partial => 'shared/ga_default') %>
+  <% end %>
+<% else %>
+  <% content_for(:before_body_tag) do %>
+  	<%= render(:partial => 'shared/ga') %>
+  <% end %>
+<% end %>
+
+<% content_for(:in_header_wrap) do %>
+  <%= render(:partial => 'in_header_wrap' ) %>
+<% end %>
+
+<% if !flash[:notice].blank? %>
+	<div class="notice">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<div class="project list">
+  <% if @user.id.to_i == session[:user_id].to_i %>
+    <span class="edit project"><%= link_to("Edit Projects", "http://ngtv2.info/mine")%></span>
+  <% end %>
+  
+  
+  
+<br style="clear:both;" />
+
+<% @projects.each do |project| %>
+	<div class="project-thumb">
+		<%= link_to image_tag(Project.image_thumbnail(project)), Project.subdomain_url(@user.subdomain_name, "/project/?id=#{project.id}"), :class => 'thumbnail' %>
+		<p style="text-align: center;"><%= project.title %> </p>
+	</div>
+<% end %>
+<br style="clear:both;" />
+
+</div>
+
+<% if @user.email.present? %>
+  <% content_for(:foot) do %>
+    <div class="footer"><%= @user.email %></div>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<% @page_title = "#{session[:username]}'s Projects" %>
+<% content_for(:head) do %>
+	<%= stylesheet_link_tag "proj_style" %>
+<% end %>
+
+<div id="preview-body">
+	<% @projects.each do |project| %>
+	<div class="project-thumb">
+		<%= image_tag('project_thum.png')%><br />
+		<p style="text-align: center;"> <%= project.title %> </p> 
+	</div>
+	<% end %>
+</div>

@@ -1,0 +1,59 @@
+<% @page_title = "Crop avatar" %>
+<% content_for(:head) do %>
+<%= stylesheet_link_tag "crop/css/jqueryJcrop" %>
+<%= javascript_include_tag "crop/js/jqueryJcropmin" %>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  function updatePreview(coords) {
+    $('#preview').css({
+      'width': Math.round(165/coords.w * $('#cropbox').width()) + 'px',
+      'height': Math.round(165/coords.h * $('#cropbox').height()) + 'px',
+      'marginLeft': '-' + Math.round(165/coords.w * coords.x) + 'px',
+      'marginTop': '-' + Math.round(165/coords.h * coords.y) + 'px'
+    });
+  }
+
+  function update_crop(coords) {
+    $("#crop_x").val(coords.x);
+    $("#crop_y").val(coords.y);
+    $("#crop_w").val(coords.w);
+    $("#crop_h").val(coords.h);
+    updatePreview(coords)
+  }
+
+  $('#cropbox').Jcrop({
+    onChange: update_crop,
+    onSelect: update_crop,
+    setSelect: [0, 0, 600, 600],
+    aspectRatio: 1
+  });
+});
+
+</script>
+<% end %>
+
+
+<h4>Preview</h4>
+<div style="width:165px !important; height:165px !important; overflow:hidden;">
+  <%= image_tag @user.avatar.url(:large), :id => "preview" %>
+</div>
+
+<center>
+<%= image_tag @user.avatar_url(:large), :id => "cropbox" %>
+
+<% if @user.id.blank? 
+    to_do = 'create'
+   else
+   	to_do = 'update'
+   end
+%>
+
+<%= form_for(:user, :url => {:action => to_do, :id => @user.id}, :html => { :multipart => true }) do |f| %>
+
+	<% [:crop_x, :crop_y, :crop_w, :crop_h].each do |attribute| %>
+		<%= f.hidden_field attribute , :id => attribute %>
+	<% end %>
+	<p><%= f.submit "Crop"%></p>
+<% end %>
+</center>
+

@@ -1,0 +1,57 @@
+div#header .header-wrap {
+  width: 800px;
+  margin: 0 auto;
+}
+/*form style*/
+.fieldset {
+	margin: 0 0 15px 0;
+}
+.label {
+	color: #C00;
+}
+.field {
+
+}
+
+.f-edit {
+	display:none;
+}
+/*end form style*/
+.image-block {
+  width: 780px;
+  margin: 0 13px 10px 13px;
+  text-align: center;
+}
+.image-block img {
+  display: block;
+}
+.image-holder-thumb {
+  background: #E6E6E6;
+  width: 780px; 
+}
+
+.image-action {
+	text-align: right;
+}
+.image-action a {
+	text-decoration: none;
+	color: #ee3300;
+	font-size: 12px;
+}
+#images-container { min-height: 250px;}
+.image-block-small {
+  width: 240px;
+  float: left;
+  margin: 4px;
+}
+a.thumb {
+  display: block;
+}
+a.thumb img {
+  width: 240px;
+  height: 140px;
+}
+
+.sm-container {
+  text-align: right;
+}

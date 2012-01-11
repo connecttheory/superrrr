@@ -1,0 +1,72 @@
+  <div class="sm-container">
+    <fb:like send="true" layout="button_count" width="100" show_faces="false" data-size="large" font="arial"></fb:like>
+  
+    <a href="https://twitter.com/share" class="twitter-share-button" data-via="ngtv2" data-lang="en" data-count="none">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+  
+  <!-- IF USER CUSTOM HEADER LOGO IS PRESENT -->
+  <% if @user.logo.url.nil? %>
+    <h1 id="porfolio-home"><a href="/"><%= @user.header_title %></a></h1>
+  <% else %>
+      <a href="/"><%= image_tag( @user.logo.url(:thumb) ) %></a>
+  <% end %>
+  
+  <ul class="porfolio-nav">
+    <li><a href="/">Work</a></li>	
+    <li><%= link_to "About", Project.subdomain_url(@user.subdomain_name, "/about") %></li>
+  </ul>
+  
+  <br class="clear" />
+  
+  
+  <% content_for(:html_attr) do %>
+    <%= "xmlns=\"http://www.w3.org/1999/xhtml\" 
+        xmlns:fb=\"http://ogp.me/ns/fb#\"".html_safe %>
+  <% end %>
+
+  <% content_for(:head) do %>
+    <!-- 
+    <meta property="og:title" content="<%= @page_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.url %>" />
+    <meta property="og:image" content="https://teststorage123.s3.amazonaws.com/uploads/image/carimage/410/thumb_snow_leopard.jpg" />
+    <meta property="og:site_name" content="<%= @page_title %>" />
+    <meta property="og:description" content="I just added my new portfolio on superrrr.com - check it out  <%= request.url %>"/>
+    <meta property="og:locale" content="en_US" />
+    
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+    -->
+  <% end %>
+
+    
+    
+  <% content_for(:before_body_tag) do %>
+  	
+  <div id="fb-root"></div>
+  <script type="text/javascript">
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '129374057178540', // App ID
+        channelUrl : '//ngtv2.info/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+  	
+    }; //window.fbAsyncInit = function() {
+
+    // Load the SDK Asynchronously
+    (function(d){
+       var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       d.getElementsByTagName('head')[0].appendChild(js);
+     }(document));
+  </script>
+  <% end %>

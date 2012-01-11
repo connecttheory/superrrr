@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html <%= yield(:html_attr) %>>
+<head>
+  <title><%= @page_title %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag 'application' %> 
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+  <!-- 
+  <%= javascript_include_tag 'project_js/jquery.lazyload.min.js' %>
+  <script type="text/javascript">
+    $(function() {
+      //$("#images-container").lazyload(); // lazyload all image on page
+      //$("img").lazyload({ effect : "fadeIn" });
+      //$("img").lazyload({ effect : "fadeIn" });
+    });
+  </script>
+  -->
+</head>
+<body>
+  <%= yield(:before_body_tag) %>
+  
+  
+  <div id="header">
+  	<div class="header-wrap">
+  		
+  	<%= yield(:in_header_wrap) %>
+  		
+    <% if !flash[:notice].blank? %>
+      <div class="notice">
+      	<%= flash[:notice]%>
+      </div>
+    <% end %>	
+    	
+  	<% if current_user  %>
+  	  <p class="small mini-nav">
+  	  	<span style="font-size: 10px;">
+  	      <%= session[:username]%>s Portfolio(<%= link_to("View your porfolio", 
+  	      root_url(:subdomain => @user.subdomain_name ), :class => 'action preview subdomainLink', :target => 'blank') %>)
+  	    </span>
+  	    <span class="fright ">
+  	      Signed in as <%= session[:username] %>
+  	      | <%= link_to("Help", "#") %> |
+  	      <%= link_to("Logout", {:controller => 'access', :action => 'logout'}, :id => 'logout') %>
+  	    </span>
+  	  </p>
+  	  <br /><br />
+  	  <ul class="main-nav">
+  	  	<li><%= link_to("Projects", {:controller => 'access', :action => 'profile'}, :class => 'Home') %></li>
+  	  	<li><%= link_to("About", {:controller => 'about'}, :class => 'about') %></li>
+  	  	<li><%= link_to("Personalize", {:controller => 'personalize'}, :class => 'personalize') %></li>
+  	  	<li><%= link_to("Settings", {:controller => 'settings'}, :class => 'setting') %></li>
+  	  	<li>Upgrade!</li>
+  	  </ul>
+  	  <br style="clear: both;" />
+    <% end #unless !session[:user_id] % %>
+    
+    </div><!-- end header-wrap -->
+  </div> <!-- end header -->
+  
+
+  <div id="container">
+    <%= yield %>
+  </div>
+  
+  <!-- Footer Start -->
+  <% if @user && !@project.blank? && @project.layout_name != 'Layout 2' %>
+  <div id="main-footer">
+  	<div id="footer-wrap">
+  	  <span class="fleft">
+  	    www.superrrr.com
+  	  </span>
+  	  <% if @user.footer_title.blank? %>
+  	    <span class="fright">
+  	      &copy; <%= Time.now.year %>
+  	    </span>
+  	  <% else %>
+  	    <span class="fright">
+  	      <%= @user.footer_title %>
+  	    </span>
+  	  <% end %>
+  	</div>
+  </div>
+  <% end %>
+  <!-- Footer End -->
+  
+  <%= yield(:foot) %>
+</body>
+</html>

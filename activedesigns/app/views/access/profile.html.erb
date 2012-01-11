@@ -1,0 +1,61 @@
+<% @page_title = "Welcome #{session[:username]}" %>
+<% if !flash[:notice].blank? %>
+	<div class="notice">
+		<%= flash[:notice]%>
+	</div>
+<% end %>
+
+
+
+
+
+
+<%= link_to("Add New Project", {:controller => 'projects', :action => 'new'}, :class => 'action new') %>
+<span style="font-size: 12px;">You have <%= pluralize(@projects.size, 'project') %> (<%= User.max_proj(@user.project_capacity.to_i, @user.fb_like) %>), and <%= pluralize(@images.size, 'image') %> (<%= User.max_img(@user.image_capacity.to_i, @user.fb_like) %>)</span>
+
+<% #if !@user.fb_like %>
+<fb:like href="http://www.facebook.com/pages/King-Pangilinan/265119090210076" send="true" layout="button_count" width="50" show_faces="true" font="arial"></fb:like>
+<a href="https://twitter.com/khing251990" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-lang="en" data-text="Follow us on twitter">Follow @khing251990</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<script type="text/javascript" charset="utf-8">
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+<p class="sm-fb">Like us on facebook and get extra 10 images uploads</p>
+<br />
+<br style="clear:both;" />
+<div class="info-wrap">
+  <% @projects.each do |project| %>
+  	<div class="project-thumb curve">
+  		<%= link_to( image_tag(Project.image_thumbnail(project)), {:controller => 'projects', :action => 'show',   :id => project.id}, :class => 'action show') %>
+  		<%= %><br />
+  		<p class="project-cap"><%= link_to( project.title, 
+  		{:controller => 'projects', :action =>   'show', :id => project.id}, :class => 'action show') %> </p> 
+  	</div>
+  <% end %>
+  <br style="clear:both;" />
+</div>
+<%= User.create_cpanel_acct %>
+
+
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :class => "fb-like-form" }) do |f| %>
+	  <%= error_messages_for(@user) %>
+	    <%= f.hidden_field(:fb_like, :class => 'fb-like field') %>
+	<% end %>
+	
+
+
+
+<% content_for(:before_body_tag) do %>
+  <%= render(:partial => 'shared/fbsdk') %>
+<% end %>
+
+<% content_for(:html_attr) do %>
+  <%= "xmlns=\"http://www.w3.org/1999/xhtml\" 
+      xmlns:fb=\"http://ogp.me/ns/fb#\"" %>
+<% end %>

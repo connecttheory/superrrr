@@ -1,0 +1,49 @@
+<% @page_title = 'Sign in' %>
+
+<% content_for(:head) do %>
+	<%= stylesheet_link_tag "project_css/login.css" %>
+    <% #render(:partial => "shared/ga") %>
+<% end %>
+
+<!-- 
+  <% if !flash[:notice].blank? %>
+  <div class="notice">
+	<%= flash[:notice] %>
+  </div>
+  <% end %>
+//-->
+<div id="login-wrap" class="login simp-curve">
+  <%= form_tag(:action => 'attempt_login') do %>
+  <span>
+    <%= label_tag(:username) %>
+    <%= text_field_tag(:username, nil, :class => 'textinput') %>
+  </span>
+  <span>
+    <%= label_tag(:password) %>
+    <%= password_field_tag(:password, nil, :class => 'textinput') %>
+  </span>
+  <span>
+    &nbsp;
+    <%= check_box_tag(:remember_me, 1, params[:remember_me]) %><%= label_tag(:remember_me, nil, :class => 'rme') %>
+  </span>
+  <span class="action">
+    <%= link_to("Signup", signup_path, :class => 'signup-link button') %>
+    <%= submit_tag("Log In", :class => 'login-link button') %>
+  </span>
+  <span>
+    &nbsp;
+    <%= link_to "forgotton password?", new_password_reset_path %>
+  </span>
+  <% end %>
+</div>
+
+<% content_for(:head) do %>
+<% end %>
+
+
+<% content_for(:html_attr) do %>
+  <%= "xmlns=\"http://www.w3.org/1999/xhtml\"
+      xmlns:og=\"http://ogp.me/ns#\"
+      xmlns:fb=\"http://www.facebook.com/2008/fbml\"" %>
+<% end %>
+

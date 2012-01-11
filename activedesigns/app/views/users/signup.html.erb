@@ -1,0 +1,18 @@
+<%= error_messages_for(@user) %>
+<% @page_title = 'Sign Up' %>
+
+<%= link_to("<Sign in>", {:controller => 'access', :action => 'login'}, :class => 'back-link') %>
+
+<div class="user form simp-curve signup">
+  <h2>Signup for FREE!!!</h2>
+
+  <%= form_for(:user, :url => {:action => 'signup_process'}, :html => { :multipart => true }) do |f| %>
+
+    <%= render(:partial => 'form', :locals => {:f => f} ) %>
+  
+    <div class="form-buttons">
+      <%= submit_tag('Create an Account') %>
+    </div>
+  
+  <% end %>
+</div>

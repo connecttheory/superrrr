@@ -1,0 +1,9 @@
+pkg/*
+*.gem
+.bundle
+.idea
+*.swp
+test.rb
+*~
+coverage/
+doc/

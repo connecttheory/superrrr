@@ -1,0 +1,60 @@
+<% @page_title = "Crop Logo" %>
+<% content_for(:head) do %>
+<%= stylesheet_link_tag "crop/css/jqueryJcrop" %>
+<%= javascript_include_tag "crop/js/jqueryJcropmin" %>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  function updatePreview(coords) {
+    $('#preview').css({
+      'width': Math.round(260/coords.w * $('#cropbox').width()) + 'px',
+      'height': Math.round(70/coords.h * $('#cropbox').height()) + 'px',
+      'marginLeft': '-' + Math.round(260/coords.w * coords.x) + 'px',
+      'marginTop': '-' + Math.round(70/coords.h * coords.y) + 'px'
+    });
+  }
+
+  function update_crop(coords) {
+    $("#crop_logo_x").val(coords.x);
+    $("#crop_logo_y").val(coords.y);
+    $("#crop_logo_w").val(coords.w);
+    $("#crop_logo_h").val(coords.h);
+    updatePreview(coords)
+  }
+
+  $('#cropbox').Jcrop({
+    onChange: update_crop,
+    onSelect: update_crop,
+    setSelect: [0, 0, 260, 70],
+    //aspectRatio: 1
+    aspectRatio: 26 / 7
+  });
+});
+
+</script>
+<% end %>
+
+
+<h4>Preview</h4>
+<div style="width:260px !important; height:70px !important; overflow:hidden;">
+  <%= image_tag @user.logo.url(:large), :id => "preview" %>
+</div>
+
+<center>
+<%= image_tag @user.logo_url(:large), :id => "cropbox" %>
+
+<% if @user.id.blank? 
+    to_do = 'create'
+   else
+   	to_do = 'update'
+   end
+%>
+
+<%= form_for(:user, :url => {:action => to_do, :id => @user.id, :logo => 1}, :html => { :multipart => true }) do |f| %>
+
+	<% [:crop_logo_x, :crop_logo_y, :crop_logo_w, :crop_logo_h].each do |attribute| %>
+		<%= f.text_field attribute , :id => attribute %>
+	<% end %>
+	<p><%= f.submit "Crop"%></p>
+<% end %>
+</center>
+
