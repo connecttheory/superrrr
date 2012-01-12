@@ -1,0 +1,119 @@
+<% @page_title = "Settings: #{@user.name}'s Portfolio" %>
+<% content_for(:head) do %>
+	<%= javascript_include_tag 'project_js/form' %>
+	<%= stylesheet_link_tag "about_style" %>
+<% end %>
+
+<div class="section">
+  <h1 class="section-title">Stats</h1>
+  <p class="sec-desc">Get the lowdown on who's checking out your work by adding tracking through Google Analytics.</p>
+  <div class="info-wrap">
+  	
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj info-wrap subdomainfrm" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<%= content_tag(:p, "Google Analytics: ", :class => "tiny") %>
+			<span class="text fval"><%= @user.google_analytics %></span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Google Analytics /", :class => "tiny") %>
+			<%= f.text_field(:google_analytics, :class => 'halfbig field') %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+	
+    
+  </div>
+</div>
+
+<div class="section">
+  <h1 class="section-title">Privacy</h1>
+  <div class="info-wrap">
+    <%= content_tag(:p, "Privacy /", :class => "tiny") %>
+  </div>
+</div>
+
+
+<div class="form-wrap portfolio-add">
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj info-wrap subdomainfrm" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<p class="label tiny">Portfolio Address: </p>
+			<span class="text fval"><%= @user.subdomain_name + '.' + request.domain %></span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Portfolio Address /", :class => "tiny") %>
+			<%= f.text_field(:subdomain_name, :class => 'halfbig field') %>.<%= request.domain %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+</div> <!-- END .form-wrap -->
+
+<div class="section">
+  <h1 class="section-title">Sign-in Settings</h1>
+  <div class="info-wrap">
+  	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj info-wrap" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<p class="label tiny">Sign-in Username: </p>
+			<span class="text fval"><%= @user.username %></span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Sign-in Username /", :class => "tiny") %>
+			<%= f.text_field(:username, :class => 'big field') %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+	
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj info-wrap" }) do |f| %>
+	<%= error_messages_for(@user) %>
+	<div class="rowfield">
+		<div class="row fview">
+			<div class="edit-btn">Edit</div>
+			<p class="label tiny">Password: </p>
+			<span class="text fval">************</span>
+		</div>
+		<div class="row fedit">
+			<%= content_tag(:p, "Old Password /", :class => "tiny") %>
+			<%= f.text_field(:password, :class => 'big field') %>
+			<%= content_tag(:p, "New Password /", :class => "tiny") %>
+			<%= f.text_field(:password, :class => 'big field') %>
+			<%= content_tag(:p, "Retype Password /", :class => "tiny") %>
+			<%= f.text_field(:password, :class => 'big field') %>
+			<p class="action">
+			  <%= submit_tag("Save", :class => 'save')  %>
+			  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</p>
+		</div>
+	</div>
+	<% end %>
+	
+  </div> <!-- end .info-wrap-->
+</div> <!-- end section -->
+
+<div class="section">
+  <h1  class="section-title">Delete Your Portfolio</h1>
+  <p class="sec-desc">Canceling your account will immediately and permanently delete your portfolio. If you have a paid account you won't be charged again after your cancelation date.</p>
+  <div class="info-wrap">
+  	<%= link_to("Delete", { :controller => 'users', :action => 'destroy', :id => @user.id }, :class => 'delete account')  %>
+
+  </div>
+</div>

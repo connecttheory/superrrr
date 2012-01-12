@@ -1,0 +1,284 @@
+  <h1>Personal Information</h1>
+  <div class="info-wrap">
+
+	<div class="form-wrap name">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Real Name: </p>
+				<span class="text fval"><%= @user.name %></span>
+			</div>
+			<div class="row fedit">
+				<%= f.label(:first_name, :class=> 'tiny') %>
+				<%= f.text_field(:first_name, :class => 'halfbig field') %>
+				<%= f.label(:last_name, :class=> 'tiny') %>
+				<%= f.text_field(:last_name, :class => 'halfbig field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	<% if @user.avatar.url.nil? #if user avatar is not set %>
+	  <p class="label tiny">Upload Image: tempo </p>
+	  <%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+	    <%= f.file_field :avatar %>
+	    	<p class="action">
+	  	  <%= submit_tag("Save", :class => 'save')  %>
+	  	</p>
+	  <% end %>
+	<% else #if user avatar is set %>
+	  <div class="form-wrap image">
+	  	<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj_image" }) do |f| %>
+	  	<%= error_messages_for(@user) %>
+	  	  <div class="rowfield">
+	  		<div class="edit-btn">Edit</div>
+	  		<p class="label tiny">Profile Picture: </p>
+	  		<%= image_tag @user.avatar.url(:avatarthumb).to_s %>
+	  	  </div>
+	  	  <div class="row fedit">
+	  	  	<%= content_tag(:p, "Profile Picture /", :class => "tiny") %>
+	  		<%= f.file_field :avatar %>
+	  		<p class="action">
+	  		  <%= submit_tag("Save", :class => 'save')  %>
+	  		  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+	  		</p>
+	  	  </div>
+	  	<% end %>
+	  </div> <!-- END .form-wrap -->
+    <% end # end of if @user.avatar.url.nil?%>
+
+
+	<div class="form-wrap about-you">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">About You: </p>
+				<span class="text fval"><%= @user.about_user %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "About You /", :class => "tiny") %>
+				<%= f.text_area(:about_user, :cols => 70, :rows => 8, :class => 'field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	<div class="form-wrap expertise">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Expertise: </p>
+				<span class="text fval"><%= @user.expertise %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Areas of Expertise /", :class => "tiny") %>
+				<%= f.text_field(:expertise, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	
+	<div class="form-wrap skills">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Skills: </p>
+				<span class="text fval"><%= @user.skills %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Skills /", :class => "tiny") %>
+				<%= f.text_field(:skills, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+  </div> <!-- END .info-wrap -->
+	
+  
+  
+  <!-- SOCIAL NETWORKING SITE FB, TWIT, FLICK, LINKEDIN, ETC -->
+  <h1>Secial Networking</h1>
+  <div class="info-wrap">
+  	<!-- FB -->
+  	<div class="form-wrap fb">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Facebook : </p>
+				<span class="text fval">http://www.facebook.com/<%= @user.fb_sm %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Enter your Facebook URL to Like /", :class => "tiny") %>
+				<span style="font-size: 27px;">http://www.facebook.com/</span><%= f.text_field(:fb_sm, :class => 'halfbig field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	<!-- TWITTER -->
+  	<div class="form-wrap twitter">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Twitter : </p>
+				<span class="text fval"><%= @user.twitter_sm %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Enter your Twitter Username /", :class => "tiny") %>
+				<%= f.text_field(:twitter_sm, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	<!-- LINKED -->
+  	<div class="form-wrap linkedin">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Linkedin : </p>
+				<span class="text fval"><%= @user.linkedin_sm %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Linkedin /", :class => "tiny") %>
+				<%= f.text_field(:linkedin_sm, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+  </div>
+  <!-- END info-wrap -->
+  
+  <h1>Contact</h1>
+  <div class="info-wrap">
+	<div class="form-wrap email">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Email: </p>
+				<span class="text fval"><%= @user.email %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Email /", :class => "tiny") %>
+				<%= f.text_field(:email, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	<div class="form-wrap location">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Location: </p>
+				<span class="text fval"><%= @user.location %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Location /", :class => "tiny") %>
+				<%= f.text_field(:location, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+
+
+
+	<div class="form-wrap phone">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Phone Number: </p>
+				<span class="text fval"><%= @user.phone %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Phone Number /", :class => "tiny") %>
+				<%= f.text_field(:phone, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	<div class="form-wrap availability">
+		<%= form_for(:user, :url => {:controller => 'users', :action => 'update', :id => @user.id}, :html => { :multipart => true, :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@user) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<span class="label">Availability: </span>
+				<span class="text fval"><%= @user.availability %></span>
+			</div>
+			<div class="row fedit">
+				<%= f.label(:availability) %>
+				<%= f.text_field(:availability, :cols => 70, :rows => 2, :class => 'field') %>
+				<%= submit_tag("Save", :class => 'save')  %>
+				<%= link_to("Cancel", '#', :class => 'fcancel')  %>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+  </div> <!-- END .info-wrap -->

@@ -1,0 +1,57 @@
+body {
+  font-family: Georgia,'Times New Roman',Times,serif;
+  background: #EFEFEF;
+}
+h1 a {
+  text-decoration: none;
+  position: relative;
+  color: #555555;
+  text-shadow: none;
+}
+h1 {
+  text-shadow: none;
+}
+h1#porfolio-home {
+  width: 550px;
+  float: left;
+  font-size: 18px;
+}
+div#header {
+  background: none;
+  padding: 20px 0;
+}
+.porfolio-nav {
+  display: inline;
+  float: right;
+}
+.porfolio-nav li {
+  float: left;
+  margin: 0 0 0 15px;
+  a {
+    font-size: 14px;
+    color: #888888;
+    display: block;
+  }
+}
+
+/* project thumbnail style*/
+.project-thumb a.thumbnail {
+  display: block;
+}
+.project-thumb a.thumbnail img {
+  margin: 4px;
+}
+.project-thumb a.thumbnail img:hover {
+  border: 4px solid #CCCCCC;
+  margin: 0;
+}
+
+/* body style*/
+#container {
+  background: url(http://s.cmcdn.net/cm/thumbs/2011-09-10/img/general/header_bg-main.png) no-repeat scroll center 0 transparent;
+}
+
+#footer-wrap {
+  width: 800px;
+  padding: 10px 0;
+}

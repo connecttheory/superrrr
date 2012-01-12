@@ -1,0 +1,14 @@
+h2.project-title {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+}
+#project-description h2 {
+  font: normal normal normal 26px/normal Helvetica;
+  color: #ffffff;
+}
+div#header {
+  background: #e1e1e1;
+}
+#container {
+  width: 780px;
+}

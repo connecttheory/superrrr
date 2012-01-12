@@ -1,0 +1,27 @@
+<% @page_title = "Welcome #{session[:username]}" %>
+<% if !flash[:notice].blank? %>
+	<div class="notice">
+		<%= flash[:notice]%>
+	</div>
+<% end %>
+
+
+<%= link_to("Add New Project", {:controller => 'projects', :action => 'new'}, :class => 'action new') %>
+<span style="font-size: 12px;">You have <%= pluralize(@projects.size, 'project') %> , and <%= pluralize(@images.size, 'image') %></span>
+<br />
+<br style="clear:both;" />
+
+<% @projects.each do |project| %>
+	<div class="project-thumb">
+		<%= link_to( image_tag(Project.lastest_image(project)), {:controller => 'projects', :action => 'show', :id => project.id}, :class => 'action show') %>
+		<%= %><br />
+		<p style="text-align: center;"><%= link_to( project.title, {:controller => 'projects', :action => 'show', :id => project.id}, :class => 'action show') %> </p> 
+	</div>
+<% end %>
+<br style="clear:both;" />
+<!--
+<h1>The Profile Page</h1>
+<h3><%= link_to("Add a Project", {:controller => 'projects', :action => 'new'}, :class => 'action new') %></h3>
+<h3><%= link_to("View Projects", {:controller => 'projects', :action => 'list'}, :class => 'action view') %></h3>
+<p>Find me in app/views/access/profile.html.erb</p>
+-->

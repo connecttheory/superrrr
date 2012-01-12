@@ -1,0 +1,19 @@
+<% @page_title = "Create a new Project" %>
+
+<% content_for(:head) do %>
+	<%= stylesheet_link_tag "project_css/project_parent.css" %>
+<% end %>
+
+
+<div class="project form new simp-curve">
+  <h2>Add new Project</h2>
+  <%= form_for(:project, :url => {:action => 'create', :user_id => session[:user_id] }) do |f| %>
+  
+    <%= render(:partial => 'form', :locals => {:f => f}) %>
+    
+    <div class="form-buttons">
+      <%= submit_tag("Create a Project") %>
+    </div>
+    
+  <% end %>
+</div>

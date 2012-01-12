@@ -1,0 +1,231 @@
+<% @page_title = "View Project: #{@project.title}" %>
+<% content_for(:head) do %>
+<%= stylesheet_link_tag "proj_style" %>
+<%= stylesheet_link_tag "porfolio_view" %>
+<%= stylesheet_link_tag "styles/proj_style_auto.css" %>
+
+  <% if @project.layout_name == 'Default' %>
+    <%= stylesheet_link_tag "styles/proj_style_defaul.css" %>
+  <% elsif @project.layout_name == 'Layout 2' %>
+    <%= stylesheet_link_tag "styles/proj_style_l2.css" %>
+    
+    <%= render(:partial => 'project_template_long' ) %>
+    
+	<% content_for(:foot) do %>
+
+	<% end %>
+    
+  <% elsif @project.layout_name == 'Layout 3' %>
+    <%= stylesheet_link_tag "styles/proj_style_l3.css" %>
+    <% # slider template 3  %>
+	<%= javascript_include_tag 'project_js/jquery.carouFredSel-5.1.0.js' %>
+    <% # slider template 3 settings %>
+    <%= javascript_include_tag 'project_js/settings-carouFredSel.js' %>
+	<style type="text/css">
+		#carousel-wrapper {
+			border: 1px solid #ddd;
+			background-color: #fff;
+			width: 820px;
+			min-height: 500px;			
+			box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+			position: relative;
+			margin: 0 0 0 -20px;
+		}
+		#carousel {
+			width: 780px;
+			height: 525px;
+			margin: 20px 0 0 20px;
+			overflow: hidden;
+		}
+		#carousel img {
+			display: block;
+			float: left;
+		}
+		#prev, #next {
+			display: block;
+			width: 350px;
+			height: 525px;
+			position: absolute;
+			top: 20px;
+		}
+		#prev img, #next img {
+			background: url(/assets/img/thumb-bgs.png) 0 0 no-repeat transparent;
+			display: none;
+			padding: 15px;
+			position: absolute;
+			top: 200px;
+		}
+		#prev:hover img, #next:hover img {
+			display: block;
+		}
+		#prev {
+			left: 20px;
+		}
+		#next {
+			right: 20px;
+		}
+		#prev img {
+			background-position: 0 -230px;
+			padding-left: 25px;
+			left: 0;
+		}
+		#next img {
+			background-position: 0 -115px;
+			padding-right: 25px;
+			right: 0;
+		}
+		#carousel-wrapper:hover #prev, #carousel-wrapper:hover #next {
+			display: block !important;
+		}
+		#navi {
+			width: 760px;
+			margin: 15px 0 0 40px;
+		}
+		#pagenumber, #title, #pager {
+			margin: 0;
+			padding: 0;
+		}
+		#pagenumber {
+			width: 200px;
+			float: left;
+		}
+		#title {
+			font-size: 18px;
+			text-align: center;
+			width: 260px;
+			float: left;
+		}
+		#pager {
+			text-align: right;
+			width: 300px;
+			float: right;
+		}
+		#pager a {
+			text-decoration: none;
+			text-align: center;
+			line-height: 20px;
+			display: inline-block;
+			width: 18px;
+			height: 20px;
+			position: relative;
+		}
+		#pager a.selected {
+			background-color: #666;
+			color: #fff;
+		}
+		#pager a img {
+			background: url(/assets/img/thumb-bgs.png) 0 0 no-repeat transparent;
+			padding: 15px 15px 25px 15px;
+			display: none;
+			position: absolute;
+			bottom: 20px;
+			left: -57px;
+		}
+		#pager a:hover img {
+			display: block;
+		}
+	</style>
+
+  <% elsif @project.layout_name == 'Layout 4' %>
+    <%= stylesheet_link_tag "styles/proj_style_l4.css" %>
+  <% end %>  
+
+  
+<% end %>
+
+<% content_for(:in_header_wrap) do %>
+  <%= render(:partial => 'in_header_wrap' ) %>
+<% end %>
+
+  <h2 class="project-title"><%= @project.title %></h2>
+  
+  <% if @project.layout_name == 'Default' # only show this area if layout 1/default isset %>
+
+    <div id="images-container">
+    	<% @project_images.each do |image| %>
+    	  <div class="image-block">
+    	  	<div class="image-holder-thumb">
+    	  		<center><%= image_tag( image.carimage_url.to_s ) %></center>
+    	  	</div>
+    	  	<%= image.caption %>
+    	  </div>
+    	<% end %>
+    	<br style="clear: both;" />
+    </div>
+    
+    <div id="project-description">
+    	<h2>Title: <%= @project.title %></h2>
+    	<h2>Website: <%= @project.project_url %></h2>
+    	<h2>Client: <%= @project.client %></h2>
+    	<h2>Tags: <%= @project.project_category %></h2>
+    </div>
+    
+  <% end %>
+  
+  
+  <% if @project.layout_name == 'Layout 2' # only show this area if layout 2 isset %>
+
+	<!--Thumbnail Navigation-->
+	<div id="prevthumb"></div>
+	<div id="nextthumb"></div>
+	
+	<!--Arrow Navigation-->
+	<a id="prevslide" class="load-item"></a>
+	<a id="nextslide" class="load-item"></a>
+	
+	<div id="thumb-tray" class="load-item">
+		<div id="thumb-back"></div>
+		<div id="thumb-forward"></div>
+	</div>
+	
+	<!--Time Bar-->
+	<div id="progress-back" class="load-item">
+		<div id="progress-bar"></div>
+	</div>
+	
+	<!--Control Bar-->
+	<div id="controls-wrapper" class="load-item">
+		<div id="controls">
+			
+			<a id="play-button"><%= image_tag("supersized/img/pause.png", :id => "pauseplay") %> <!-- <img id="pauseplay" src="img/pause.png"/> --></a>
+		
+			<!--Slide counter-->
+			<div id="slidecounter">
+				<span class="slidenumber"></span> / <span class="totalslides"></span>
+			</div>
+			
+			<!--Slide captions displayed here-->
+			<!-- <div id="slidecaption">Image</div> -->
+			
+			<!--Thumb Tray button-->
+			<a id="tray-button"><%= image_tag("supersized/img/button-tray-up.png", :id => "tray-arrow") %> <!-- <img id="tray-arrow" src="img/button-tray-up.png"/> --></a>
+			
+			<!--Navigation-->
+			<ul id="slide-list"></ul>
+			
+		</div>
+	</div>
+  <% end %>
+  
+  
+  
+  
+  
+  <% if @project.layout_name == 'Layout 3' # only show this area if layout 3 isset %>
+  <div id="carousel-wrapper">
+     <div id="carousel">
+    	<% @project_images.each do |image| %>
+    	  		<%= image_tag( image.carimage_url.to_s, :alt => image.caption ) %>
+    	  	<% # image.caption %>
+    	<% end %>
+    </div>
+    <a href="#" title="Go to the previous image." id="prev"></a>
+	<a href="#" title="Go to the next image." id="next"></a>
+	<div id="navi">
+		<p id="pagenumber">Now showing image <span></span> of 5.</p>
+		<p id="title"></p>
+		<p id="pager">Go to image <span></span></p>
+	</div>
+  </div>
+  <br /><br /><br /><br />
+  <% end %>

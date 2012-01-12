@@ -1,0 +1,32 @@
+<% @page_title = "Images List" %>
+
+<%= link_to("Logout", {:controller => 'access', :action => 'logout'}, :class => 'logout') %>
+
+<% if !flash[:notice].blank? %>
+	<div class="notice">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<div class="image list">
+  <h2>Image in project <strong style="color: #cc3300"><%= @project.title %></strong> </h2>
+  <p><%= @project.id %></p>
+  <%= form_for(:image, :url => {:action => 'create', :project_id => @project.id}, :html => { :multipart => true }) do |f| %>
+    <%= f.label :caption %> <br />
+    <%= f.text_field :caption %> <br />
+  	<%= f.file_field :proj_photo %>
+	
+  	<div class="form-buttons">
+  	  <%= submit_tag('Upload Image') %>
+    </div>
+  <% end %>
+
+  <div><%= pluralize(@images.size, 'image') %> found</div>
+  
+  <% @images.each do |image| %>
+    <div class="project image">
+	  <%= image_tag image.proj_photo.url(:list) %>
+	  <%= image.caption %>
+	</div>
+  <% end %>
+

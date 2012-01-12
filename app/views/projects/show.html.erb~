@@ -1,0 +1,33 @@
+<% @page_title = "Show Project: #{@project.title}" %>
+
+<%= link_to("<< Back to List", {:action => 'list'}, :class => 'back-link') %>
+
+<%= link_to("Add Image into this project", {:controller => 'images', :action => 'list', :id => @project.id.to_i}, :class => 'back-link') %>
+
+<div class="project show">
+  <h2>Show Project</h2>
+
+  <table summary="Project detail view">
+    <tr>
+      <th>Name</th>
+      <td><%= @project.title %></td>
+    </tr>
+    <tr>
+      <th>Visible?</th>
+      <td><%= @project.visible ? 'true' : 'false' %></td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td><%= @project.created_at %></td>
+    </tr>
+    <tr>
+      <th>Updated</th>
+      <td><%= @project.updated_at %></td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><%= @project.description %></td>
+    </tr>
+  </table>
+  
+</div>

@@ -1,0 +1,19 @@
+class Project < ActiveRecord::Base
+  
+  belongs_to :user
+  has_many :images
+  
+  validates_presence_of :title
+  
+  scope :visible, where(:visible => true)
+  scope :invisible, where(:visible => false)
+  scope :sorted, order('projects.created_at ASC')
+  scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"])}
+  
+  def self.lastest_image(project)
+    image = project.images.last
+    return image.proj_photo.url(:list)
+  end
+  
+  
+end

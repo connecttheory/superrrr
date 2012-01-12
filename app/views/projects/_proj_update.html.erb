@@ -1,0 +1,113 @@
+	<div class="form-wrap title">
+		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@project) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Name</p>
+				<span class="text fval"><%= @project.title %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Title /", :class => "tiny") %>
+				<%= f.text_field(:title, :class => 'big field', :width => '80%') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	
+	<div class="form-wrap description">
+		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@project) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Description</p>
+				<span class="text fval"><%= @project.description %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Description /", :class => "tiny") %>
+				<%= f.text_area(:description, :cols => 70, :rows => 2, :class => 'field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	
+	<div class="form-wrap project-url">
+		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@project) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Project URL</p>
+				<span class="text fval"><%= @project.project_url %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Project URL /", :class => "tiny") %>
+				<%= f.text_field(:project_url, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+	
+	
+	
+	
+	<div class="form-wrap client">
+		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@project) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Client</p>
+				<span class="text fval"><%= @project.client %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Client /", :class => "tiny") %>
+				<%= f.text_field(:client, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
+
+
+
+	<div class="form-wrap category">
+		<%= form_for(:project, :url => {:action => 'update', :id => @project.id, :user_id => session[:user_id] }, :html => { :class => "form_proj" }) do |f| %>
+		<%= error_messages_for(@project) %>
+		<div class="rowfield">
+			<div class="row fview">
+				<div class="edit-btn">Edit</div>
+				<p class="label tiny">Category</p>
+				<span class="text fval"><%= @project.project_category %></span>
+			</div>
+			<div class="row fedit">
+				<%= content_tag(:p, "Category /", :class => "tiny") %>
+				<%= f.text_field(:project_category, :class => 'big field') %>
+				<p class="action">
+				  <%= submit_tag("Save", :class => 'save')  %>
+				  <%= link_to("Cancel", '#', :class => 'fcancel')  %>
+				</p>
+			</div>
+		</div>
+		<% end %>
+	</div> <!-- END .form-wrap -->
